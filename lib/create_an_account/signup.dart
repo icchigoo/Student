@@ -1,4 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:student/create_an_account/studentaccountfirstpage.dart';
+import 'package:student/create_an_account/teacheraccountfirstpage.dart';
 
 class Signuppage extends StatelessWidget {
   const Signuppage({super.key});
@@ -6,52 +10,74 @@ class Signuppage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 234, 234, 234),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'CREATE ACCOUNT',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 20,
-                  ),
+      appBar: AppBar(
+        title: const Text('Continue as a'),
+      ),
+      backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(children: const [
+                Text('We will personalize your experience \n accordingly',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 173, 171, 171)
+                ),),
+              ]),
+              const SizedBox(
+                height: 120,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [],
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50),
+                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  elevation: 20,
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
                 ),
-              ],
-            ),
-            const SizedBox(height: 200,),
-            ElevatedButton(
-              
-              style:ElevatedButton.styleFrom(
-               minimumSize:const Size(50, 50),
-              backgroundColor: Colors.white,
-              elevation: 20,
-              foregroundColor: Colors.black,
+                child: Column(
+                  children: [
+                    Image.asset('assets/teacher.png', width: 100),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text('Teacher'),
+                  ],
+                ),
+                onPressed: () {
+                  Get.to(() => const Teacheraccpage1());
+                },
               ),
-              child: const Text('TEACHER ACCOUNT'),
-              onPressed: () {
-                 Navigator.pushNamed(context, "navigatingtoteacheraccountsignup");
-              },
-            ),
-            const SizedBox(height: 50,),
-            ElevatedButton(
-              style:ElevatedButton.styleFrom(
-                 minimumSize:const Size(50, 50),
-              backgroundColor: Colors.white,
-              elevation: 20,
-              foregroundColor: Colors.black,
+              const SizedBox(
+                height: 50,
               ),
-              child: const Text('STUDENT ACCOUNT'),
-              onPressed: () {
-                Navigator.pushNamed(context, "navigatingtostudentaccountsignup");
-              },
-            ),
-          ],
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50),
+                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  elevation: 20,
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                ),
+                child: Column(
+                  children: [
+                    Image.asset('assets/student.png', width: 100),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text('Student'),
+                  ],
+                ),
+                onPressed: () {
+                  Get.to(() => const  Studentaccpage1());
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

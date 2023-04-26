@@ -1,4 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../create_an_account/loginpage.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -17,6 +21,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
@@ -38,13 +43,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 ],
               ),
              const  SizedBox(height: 250),
-             const  Text(
-                'Created by SHANIBA, SHIYANA, ADIL & SHAHABAS.',
-                style: TextStyle(
-                   fontSize: 10,
-                   fontWeight: FontWeight.w500,
-                    ),
-              )
+            
             ],
           ),
         ),
@@ -54,7 +53,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   void waitingscreen() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, "loginpage");
+      Get.off(() => const Loginpage());
     });
   }
 }
