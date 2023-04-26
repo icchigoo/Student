@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 
 import '../Teacher/menu.dart';
@@ -43,7 +42,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
   int pageIndex = 0;
 
   final teacherpages = [
-    const Menupage(),
+     Menupage(teachername: '', classname: '', subjectname: ' ',),
     const Calendarpage(),
     // const notificationpage(),
     // const profilepage(),

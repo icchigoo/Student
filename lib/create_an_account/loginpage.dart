@@ -1,12 +1,14 @@
 
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/create_an_account/reset_password.dart';
 import 'package:student/create_an_account/signup.dart';
 
+import '../Teacher/classlistview.dart';
 import '../controller/login_controller.dart';
-import '../home/appbar_bottomnavteacher.dart';
-import 'reset_password.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class _LoginpageState extends State<Loginpage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                return const Homepagelayout();
+                return const Classlistview();
               } else {
                 return Form(
                   key: controller.formkey,

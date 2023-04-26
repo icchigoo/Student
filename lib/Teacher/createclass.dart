@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Teacher/createclassdetails.dart';
+
+import 'createclassdetails.dart';
 
 class Createclass extends StatelessWidget {
   const Createclass({super.key});
