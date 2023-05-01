@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Students/menustudents.dart';
-import 'package:student/controller/createclassdetails.controller.dart';
 import 'package:student/controller/requestcontroller.dart';
+
+import '../controller/createclassdetails.controller.dart';
 
 class Classlistviewstudents extends StatefulWidget {
   const Classlistviewstudents({super.key});

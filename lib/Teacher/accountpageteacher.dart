@@ -1,18 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:student/Resources/my_flutter_app_icons.dart';
 import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/Teacher/request.dart';
 import 'package:student/Teacher/verifyemail.dart';
-
-import '../controller/login_controller.dart';
-import '../controller/profilecontrollerpage.dart';
-import '../controller/sign_up_controller.dart';
+import 'package:student/controller/login_controller.dart';
+import 'package:student/controller/profilecontrollerpage.dart';
+import 'package:student/controller/sign_up_controller.dart';
 
 class Accountpageteacher extends StatefulWidget {
   const Accountpageteacher({super.key});

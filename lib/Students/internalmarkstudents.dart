@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Resources/pdfviewer.dart';
 import 'package:student/controller/markcontroller.dart';
+
+import '../Resources/pdfviewer.dart';
 
 class Internalmarkstudent extends StatelessWidget {
    Internalmarkstudent({super.key});

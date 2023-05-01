@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Teacher/assignmentteacher.dart';
 import 'package:student/Teacher/attendancecalendarteacher.dart';
 import 'package:student/Teacher/internalmarkteacher.dart';
 import 'package:student/Teacher/notesteacher.dart';
@@ -317,7 +318,4 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
       ),
     );
   }
-}
-
-class Assignmentteacher {
 }

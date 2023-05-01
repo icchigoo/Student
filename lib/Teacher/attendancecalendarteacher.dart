@@ -1,13 +1,13 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:student/Teacher/attendacelisteacher.dart';
 import 'package:student/controller/addstudentscontroller.dart';
 import 'package:student/controller/attendancecontroller.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../Students/attendanceliststudent.dart';
 
 class AttendanceTeacher extends StatefulWidget {
   const AttendanceTeacher({super.key});

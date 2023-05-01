@@ -5,11 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:student/Students/accountpagestudent.dart';
 import 'package:student/Students/classlistviewstudents.dart';
+import 'package:student/Students/homenotificationstudents.dart';
 import 'package:student/Teacher/accountpageteacher.dart';
 import 'package:student/Teacher/classlistviewteacher.dart';
 import 'package:student/Teacher/homenotificationteacher.dart';
-
-import '../Students/homenotificationstudents.dart';
 
 
 class Homepagelayout extends StatefulWidget {

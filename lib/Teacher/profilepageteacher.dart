@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/profilecontrollerpage.dart';
+
+import '../controller/profilecontrollerpage.dart';
 
 class Profilepageteacher extends StatefulWidget {
   const Profilepageteacher({super.key});

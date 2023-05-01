@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Students/assignmentsstudents.dart';
+import 'package:student/Students/attendancestudents.dart';
+import 'package:student/Students/internalmarkstudents.dart';
 import 'package:student/Students/notesstudents.dart';
 import 'package:student/Students/notificationstudents.dart';
 import 'package:student/Students/semesterstudent.dart';
 import 'package:student/Teacher/viewstudents.dart';
 
-import 'attendancestudents.dart';
-import 'internalmarkstudents.dart';
+import 'assignmentsstudents.dart';
 
 class Myclassdetail extends StatefulWidget {
   const Myclassdetail(
