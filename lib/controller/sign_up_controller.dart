@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../home/appbar_bottomnavteacher.dart';
+import 'package:student/home/appbar_bottomnavteacher.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -17,11 +17,15 @@ class SignUpController extends GetxController {
   final formkey = GlobalKey<FormState>();
   bool obscureText = true;
 
+
+
   //creating sign up account for the studetns and teachers and validation
-  void createuser(String email, String password) async {
+  void createuser(String email, String password, String name )async {
     try {
-      await FirebaseAuth.instance
+      UserCredential result =  await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+          User? user = result.user;
+          user!.updateDisplayName(name);
       Get.offAll(const Homepagelayout());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
@@ -53,36 +57,4 @@ class SignUpController extends GetxController {
       });
     }
   }
-
-
-
-  //code for verification of email which is displayed on the account page
-  // bool isEmailVerified = false;
-  // Future<void> checkEmailVerification() async {
-  //   User user = FirebaseAuth.instance.currentUser!;
-  //   await user.reload();
-  //   if (user.emailVerified) {
-  //     print('Email is verified');
-  //   } else {
-  //     print('Email is not verified');
-  //   }
-  // }
-
-//verification code for firebase auth
-  // void sendverificationemail() {
-  //   final currentuser = FirebaseAuth.instance.currentUser!.email;
-  //   FirebaseAuth.instance.currentUser!.sendEmailVerification();
-  //   Get.showSnackbar(GetSnackBar(
-  //     borderRadius: 8,
-  //     padding: const EdgeInsets.all(20),
-  //     messageText: Text(
-  //       'The verification E-Mail has been sent to $currentuser',
-  //       style: const TextStyle(
-  //         color: Color.fromARGB(255, 161, 46, 46),
-  //       ),
-  //     ),
-  //     duration: const Duration(seconds: 3),
-  //     backgroundColor: Colors.white,
-  //   ));
-  // }
 }

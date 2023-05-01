@@ -5,7 +5,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'createclassdetails.controller.dart';
+import 'package:student/controller/createclassdetails.controller.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:intl/intl.dart';
 
 class Countercontroller extends GetxController {
   final data = Get.put(Createclassdetailscontroller());

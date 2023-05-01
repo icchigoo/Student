@@ -2,12 +2,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/login_controller.dart';
-import '../controller/sign_up_controller.dart';
-import 'reset_password.dart';
-import 'signup.dart';
-
-import '../home/appbar_bottomnavteacher.dart';
+import 'package:student/controller/login_controller.dart';
+import 'package:student/controller/sign_up_controller.dart';
+import 'package:student/create_an_account/reset_password.dart';
+import 'package:student/create_an_account/signup.dart';
+import 'package:student/home/appbar_bottomnavteacher.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -126,7 +125,10 @@ class _LoginpageState extends State<Loginpage> {
                                   LoginController.instance.signIn(
                                       controller.email.text.trim(),
                                       controller.password.text.trim());
+                                      controller.email.clear();
+                                      controller.password.clear();
                                 },
+                                
                               )),
                           const SizedBox(
                             height: 10,

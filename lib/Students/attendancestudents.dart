@@ -2,24 +2,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/controller/addstudentscontroller.dart';
+import 'package:student/controller/attendancecontroller.dart';
 
-class AttendanceStudents extends StatelessWidget {
-  AttendanceStudents({super.key, required this.classname});
-  final String classname;
+class AttendanceStudents extends StatefulWidget {
+  const AttendanceStudents({super.key});
 
+  @override
+  State<AttendanceStudents> createState() => _AttendanceStudentsState();
+}
+
+class _AttendanceStudentsState extends State<AttendanceStudents> {
   final data = Get.put(Countercontroller());
+  final controller = Get.put(Attendancecontroller());
+  final subname = Get.arguments["subname"];
+  @override
+  void initState() {
+    
+    super.initState();
+    
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
-          title: const Text('Attendance Record'),
+          title: const Text("Attendance Date"),
         ),
-        // body: SingleChildScrollView(
-          
-        // ),
+        //evde attendanceliststudentsilott navigate cheyumbo Date ne argument akki kodukuka.
       ),
     );
   }

@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/profilecontrollerpage.dart';
+import 'package:student/controller/profilecontrollerpage.dart';
 
 class Profilepageteacher extends StatefulWidget {
   const Profilepageteacher({super.key});
@@ -21,7 +21,7 @@ class _ProfilepageteacherState extends State<Profilepageteacher> {
   void initState() {
     super.initState();
     setState(() {
-      data1.collectionreferenceuser
+      FirebaseFirestore.instance.collection("User")
           .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {

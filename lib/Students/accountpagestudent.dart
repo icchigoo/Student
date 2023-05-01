@@ -4,12 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Students/myclassesstudents.dart';
+import 'package:student/Teacher/profilepageteacher.dart';
+import 'package:student/Teacher/verifyemail.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
-
-import '../Teacher/profilepageteacher.dart';
-import '../Teacher/verifyemail.dart';
-import '../controller/sign_up_controller.dart';
+import 'package:student/controller/sign_up_controller.dart';
 
 class Accountpagestudents extends StatefulWidget {
   const Accountpagestudents({super.key});
@@ -26,12 +25,16 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
   String lastname = '';
   String email = '';
   String profileurl = '';
+  User? users;
   User user = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
     super.initState();
-    data1.collectionreferenceuser.doc(data1.currentUser).get().then((value) {
+    data1.collectionreferenceuser
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((value) {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];
@@ -39,25 +42,27 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
       });
       FirebaseFirestore.instance
           .collection('User')
-          .doc(data1.currentUser)
+          .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
         setState(() {
-          profileurl = value['Profile Picture'];
+          profileurl = value['Profile-Picture'];
         });
       });
     });
-    // data2.checkEmailVerification();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool check = false;
-    if (user.emailVerified) {
-      setState(() {
-        check = true;
-      });
-    }
+    bool checks = false;
+    setState(() {
+      user.reload();
+      if(user.emailVerified){
+        checks = true;
+      }
+    });
+    
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -95,17 +100,17 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                       child: ListTile(
                         onTap: () {
                           Get.to(() => const Profilepageteacher());
-                          
                         },
                         leading: const Icon(
                           Icons.person,
                           color: Color.fromARGB(255, 161, 46, 46),
-
                         ),
-                        title: const Text('                 Profile',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Profile',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -122,10 +127,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.school,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('             My Classes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title:  const Align(
+                          child: Text('My Classes',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -135,32 +142,31 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
-                        onTap: () {
-                          Get.to(() => const EmailVerificationScreen());
-                          // if (!data2.isEmailVerified) {
-                          //  data2.sendverificationemail();
-                          // } else {
-
-                          // }
-                        },
-                        leading: const Icon(
-                          Icons.email,
-                          color: Color.fromARGB(255, 161, 46, 46),
-                        ),
-                        title: const Text('             verify E-Mail',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
-                        trailing:check
-                            ? const Icon(
-                                Icons.check,
-                                color: Colors.green,
-                              )
-                            : const Icon(
-                                Icons.close,
-                                color: Colors.red,
-                              )
-                      ),
+                          onTap: () {
+                            Get.to(() => const Verifyemailpage(),
+                            arguments: {
+                              "email" : email
+                            });
+                          },
+                          leading: const Icon(
+                            Icons.email,
+                            color: Color.fromARGB(255, 161, 46, 46),
+                          ),
+                          title:const  Align(
+                            child:  Text('verify E-Mail',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          trailing: checks
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                )
+                              : const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                )),
                     ),
                   ),
                   const SizedBox(
@@ -175,10 +181,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.settings,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: Text('                settings',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: Align(
+                          child: Text('settings',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -195,10 +203,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.logout,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Logout',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Logout',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),

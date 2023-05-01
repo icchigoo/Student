@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:student/Resources/my_flutter_app_icons.dart';
 import 'package:student/Teacher/profilepageteacher.dart';
+import 'package:student/Teacher/request.dart';
 import 'package:student/Teacher/verifyemail.dart';
-import 'package:student/controller/profilecontrollerpage.dart';
 
 import '../controller/login_controller.dart';
+import '../controller/profilecontrollerpage.dart';
 import '../controller/sign_up_controller.dart';
 
 class Accountpageteacher extends StatefulWidget {
@@ -37,14 +41,15 @@ class _ProfileteacherState extends State<Accountpageteacher> {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];
-        email = value['E-Mail'];
+        email = value["E-Mail"];
       });
-      data1.collectionreferenceuser
+      FirebaseFirestore.instance
+          .collection("User")
           .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
         setState(() {
-          data1.profileurl = value['Profile Picture'];
+          profileurl = value['Profile-Picture'];
         });
       });
     });
@@ -52,12 +57,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
 
   @override
   Widget build(BuildContext context) {
-    bool checks = false ;
-    if (user.emailVerified) {
-      setState(() {
-      checks = true;      
-      });
-    }
+    bool checks = false;
+    setState(() {
+      user.reload();
+      if (user.emailVerified) {
+        checks = true;
+      }
+    });
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -100,66 +107,66 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.person,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Profile',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Profile',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
                   ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                  //   child: Container(
-                  //     color: Colors.white,
-                  //     child: ListTile(
-                  //       onTap: () {
-                  //         Get.to(() => const Mynotificationteacher());
-                  //       },
-                  //       leading: const Icon(
-                  //         Icons.notifications,
-                  //         color: Color.fromARGB(255, 161, 46, 46),
-                  //       ),
-                  //       title: const Text('           My Notifications',
-                  //           style: TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           )),
-                  //       trailing: const Icon(Icons.arrow_forward),
-                  //     ),
-                  //   ),
-                  // ),
+                   Padding(
+                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                    child: Container(
+                      color: Colors.white,
+                      child:   ListTile(
+                        onTap:(){
+                           Get.to(() => const Requestpage());
+                        },
+                        leading:const Icon(
+                          MyFlutterApp.user_plus,
+                          color: Color.fromARGB(255, 161, 46, 46),
+                        ),
+                        title: const Align(
+                          child: Text('Request',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
                           onTap: () {
-                            Get.to(() => const EmailVerificationScreen());
-                            // if (!data2.isEmailVerified) {
-                            //   data2.sendverificationemail();
-                            // } else {
-                             
-                            // }
+                            Get.to(() => const Verifyemailpage(),
+                                arguments: {"email": email});
                           },
                           leading: const Icon(
                             Icons.email,
                             color: Color.fromARGB(255, 161, 46, 46),
                           ),
-                          title: const Text('             verify E-Mail',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
-                          trailing: checks
-                          ? const Icon(
-                                Icons.check,
-                                color: Colors.green,
-                              )
-                            : const Icon(
-                                Icons.close,
-                                color: Colors.red,
-                              )
+                          title: const Align(
+                            child:   Text('verify E-Mail',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ),
+                          trailing: checks
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                )
+                              : const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                )),
                     ),
                   ),
                   const SizedBox(
@@ -174,10 +181,12 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.settings,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: Text('                settings',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: Align(
+                          child: Text('settings',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -194,10 +203,12 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.logout,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Logout',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:   Text('Logout',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),

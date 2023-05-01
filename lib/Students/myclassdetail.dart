@@ -1,75 +1,63 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Teacher/attendancecalendarteacher.dart';
-import 'package:student/Teacher/internalmarkteacher.dart';
-import 'package:student/Teacher/notesteacher.dart';
-import 'package:student/Teacher/notificationteacher.dart';
-import 'package:student/Teacher/semestermarkteacher.dart';
+import 'package:student/Students/assignmentsstudents.dart';
+import 'package:student/Students/notesstudents.dart';
+import 'package:student/Students/notificationstudents.dart';
+import 'package:student/Students/semesterstudent.dart';
 import 'package:student/Teacher/viewstudents.dart';
-import 'package:student/controller/addstudentscontroller.dart';
-import 'package:student/controller/attendancecontroller.dart';
-import 'package:student/controller/createclassdetails.controller.dart';
-import 'package:student/controller/login_controller.dart';
-import 'package:student/controller/markcontroller.dart';
-import 'package:student/controller/notificationcontroller.dart';
 
-class TeacherMenupage extends StatefulWidget {
-  const TeacherMenupage(
+import 'attendancestudents.dart';
+import 'internalmarkstudents.dart';
+
+class Myclassdetail extends StatefulWidget {
+  const Myclassdetail(
       {super.key,
       required this.teachername,
       required this.classname,
       required this.subjectname});
-    final String teachername;
+  final String teachername;
   final String classname;
   final String subjectname;
 
   @override
-  State<TeacherMenupage> createState() => _TeacherMenupageState();
+  State<Myclassdetail> createState() => _MyclassdetailState();
 }
 
-class _TeacherMenupageState extends State<TeacherMenupage> {
-  final data1 = Get.put(Markcontroller());
-  final data2 = Get.put(Notificationcontroller());
-  final data3 = Get.put(Countercontroller());
-  final data4 = Get.put(Attendancecontroller());
-  @override
-  void initState() {
-    super.initState();
-    data1.subname1 = widget.subjectname ; 
-    data2.subname = widget.subjectname;
-    data3.subname = widget.subjectname;
-    data4.subname = widget.subjectname;
-  }
-  final controller = Get.put(LoginController());
-  final data = Get.put(Countercontroller());
-  final controller2 = Get.put(Createclassdetailscontroller());
-
+class _MyclassdetailState extends State<Myclassdetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            widget.subjectname,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 255, 255, 255),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    FirebaseFirestore.instance
+                        .collection("User")
+                        .doc(FirebaseAuth.instance.currentUser!.email)
+                        .collection("My-classes")
+                        .doc(widget.subjectname)
+                        .delete();
+                        Get.back();
+                  },
+                  icon: const Icon(Icons.delete))
+            ],
+            centerTitle: true,
+            title: Text(
+              widget.subjectname,
+              style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
             ),
+            backgroundColor: const Color.fromARGB(255, 161, 46, 46),
           ),
-          backgroundColor: const Color.fromARGB(255, 161, 46, 46),
-          actions: [
-            IconButton(
-              onPressed:() {  
-                controller2.deleteclass();
-              } , icon: const Icon(Icons.delete))
-          ],
-        ),
-        body: (Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: SingleChildScrollView(
+          body: (Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Column(
               children: [
                 const SizedBox(
@@ -116,10 +104,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => const AttendanceTeacher(),
-                          arguments: {
-                            "Subjectname" : widget.subjectname,
-                          });
+                          Get.to(() => const AttendanceStudents(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -145,8 +131,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => const Internalmarkteacher(),
-                              arguments: {"subjectname": widget.subjectname});
+                          Get.to(() => Internalmarkstudent(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -172,8 +158,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Semestermarkteacher(),
-                              arguments: {"subject": widget.subjectname});
+                          Get.to(() => Semestermarkstudent(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -207,8 +193,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Notesteacher(),
-                              arguments: {"subjectname": widget.subjectname});
+                          Get.to(() => Notesstudent(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -234,8 +220,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>const Notificationteacherpage(),
-                              arguments: {"subjectname": widget.subjectname});
+                          Get.to(() => Notificationstudentpage(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -261,10 +247,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Assignmentteacher(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                          Get.to(() => const Assignmentstudents(),
+                              arguments: {'subjectname': widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -282,7 +266,7 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                               style: TextStyle(
                                 color: Color.fromARGB(255, 153, 153, 153),
                               ),
-                            )
+                            ),
                           ],
                         ))
                   ],
@@ -295,29 +279,12 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
                       Get.to(() => const Studentsviewteacher(),
-                      arguments: {
-                        "Subjectname" : widget.subjectname
-                      });
+                          arguments: {"Subjectname": widget.subjectname});
                     },
                     child: const Text("Students List ")),
-                const SizedBox(
-                  height: 1,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(350, 50)),
-                    onPressed: () {
-                      data.addstudents(context);
-                    },
-                    child: const Text("Add Students"))
               ],
             ),
-          ),
-        )),
-      ),
+          ))),
     );
   }
-}
-
-class Assignmentteacher {
 }

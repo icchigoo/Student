@@ -3,19 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/notificationcontroller.dart';
+import 'package:student/controller/notificationcontroller.dart';
 
 class Notificationteacherpage extends StatefulWidget {
- const  Notificationteacherpage({super.key});
+  const Notificationteacherpage({super.key});
 
   @override
-  State<Notificationteacherpage> createState() => _NotificationteacherpageState();
+  State<Notificationteacherpage> createState() =>
+      _NotificationteacherpageState();
 }
 
 class _NotificationteacherpageState extends State<Notificationteacherpage> {
   final data = Get.put(Notificationcontroller());
-
 
   final subname = Get.arguments['subjectname'];
 
@@ -27,11 +26,13 @@ class _NotificationteacherpageState extends State<Notificationteacherpage> {
           title: const Text('Notification'),
         ),
         body: StreamBuilder(
-          stream:
-               FirebaseFirestore.instance
-          .collection('User')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection("Subject").doc(subname).collection("Notification").snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('User')
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .collection("Subject")
+              .doc(subname)
+              .collection("Notification")
+              .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
@@ -70,6 +71,7 @@ class _NotificationteacherpageState extends State<Notificationteacherpage> {
                                         x["Time"],
                                         style: const TextStyle(
                                           fontWeight: FontWeight.w500,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ),
@@ -77,10 +79,12 @@ class _NotificationteacherpageState extends State<Notificationteacherpage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(x['Notification'],
-                                  style: const TextStyle(
+                                  child: Text(
+                                    x['Notification'],
+                                    style: const TextStyle(
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500),),
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ));

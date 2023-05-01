@@ -3,14 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Resources/pdfviewer.dart';
+import 'package:student/controller/markcontroller.dart';
 
-import '../controller/markcontroller.dart';
-// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+class Assignmentstudents extends StatefulWidget {
+  const Assignmentstudents({super.key});
 
-class Assignmentstudents extends StatelessWidget {
-  Assignmentstudents({super.key});
+  @override
+  State<Assignmentstudents> createState() => _AssignmentstudentsState();
+}
+
+class _AssignmentstudentsState extends State<Assignmentstudents> {
   final data = Get.put(Markcontroller());
+
   final subname = Get.arguments["subjectname"];
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,9 +58,18 @@ class Assignmentstudents extends StatelessWidget {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Card(
-                            elevation: 5, 
-                            child: Text(x['PDF name']));
+                        return SizedBox(
+                          height: 50,
+                          child: Card(
+                              child: GestureDetector(
+                                  onTap: () => Get.to(() => const PDFViewer(),
+                                          arguments: {
+                                            "PDFURL": x["PDF download url"]
+                                          }),
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(x['PDF name'])))),
+                        );
                       }),
                 );
               }
@@ -66,33 +84,9 @@ class Assignmentstudents extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 161, 46, 46),
             child: const Icon(Icons.add),
             onPressed: () {
-              data.selectdocument();
-              data.assignmentsregister();
+              data.assignment();
             }),
       ),
     );
   }
-
- 
 }
-
-// class View extends StatelessWidget {
-//    View({super.key});
-
-//   final _pdfViewerController = PdfViewerController();
-
-//   final data = Get.put(Markcontroller());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('pdf viewer'),
-//       ),
-//       body: SfPdfViewer.network(
-//         data.pdfurl,
-//         controller: _pdfViewerController,
-//       ),
-//     );
-//   }
-// }

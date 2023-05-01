@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/notificationcontroller.dart';
+import 'package:student/controller/notificationcontroller.dart';
 
 class Notificationstudentpage extends StatelessWidget {
-   Notificationstudentpage({super.key});
+  Notificationstudentpage({super.key});
   final data = Get.put(Notificationcontroller());
   final subname = Get.arguments["subname"];
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -19,24 +18,27 @@ class Notificationstudentpage extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Teacher').doc('Notification').collection(subname)
+              .collection('Teacher')
+              .doc('Notification')
+              .collection(subname)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
                 return const Center(
-                  child: Text('There is no Notification to display',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color:  Color.fromARGB(255, 161, 46, 46),
-                  ),),
+                  child: Text(
+                    'There is no Notification to display',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 161, 46, 46),
+                    ),
+                  ),
                 );
               } else {
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ListView.builder(
-                      
                       shrinkWrap: true,
                       itemCount: snapshot.data == null
                           ? 0
@@ -48,15 +50,17 @@ class Notificationstudentpage extends StatelessWidget {
                             child: Column(
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                        padding:
+                                      padding:
                                           const EdgeInsets.fromLTRB(0, 5, 5, 0),
                                       child: Text(
                                         x["Time"],
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w500,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ),
@@ -64,7 +68,12 @@ class Notificationstudentpage extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(x['Notification']),
+                                  child: Text(
+                                    x['Notification'],
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ));
@@ -82,11 +91,3 @@ class Notificationstudentpage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-

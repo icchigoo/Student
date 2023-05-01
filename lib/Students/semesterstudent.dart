@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/markcontroller.dart';
-// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:student/Resources/pdfviewer.dart';
+import 'package:student/controller/markcontroller.dart';
 
 class Semestermarkstudent extends StatelessWidget {
    Semestermarkstudent({super.key});
@@ -44,11 +43,18 @@ class Semestermarkstudent extends StatelessWidget {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                         return Card(
-                          
-                          child: GestureDetector(
-                            // onTap: () => const View(),
-                            child: Text(x['PDF name'])));
+                        return SizedBox(
+                          height: 50,
+                          child: Card(
+                              child: GestureDetector(
+                                  onTap: () => Get.to(() => const PDFViewer(),
+                                  arguments: {
+                                    "PDFURL" : x["PDF download url"]
+                                  }),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(x['PDF name'])))),
+                        );
                       }),
                 );
               }
@@ -64,28 +70,3 @@ class Semestermarkstudent extends StatelessWidget {
   }
 }
 
-// class View extends StatefulWidget {
-//   const View({super.key});
-
-//   @override
-//   State<View> createState() => _ViewState();
-// }
-
-// class _ViewState extends State<View> {
-//   final _pdfViewerController = PdfViewerController();
-
-//   final data = Get.put(Markcontroller());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('pdf viewer'),
-//       ),
-//       body: SfPdfViewer.network(
-//         data.pdfurl,
-//         controller: _pdfViewerController,
-//       ),
-//     );
-//   }
-// }

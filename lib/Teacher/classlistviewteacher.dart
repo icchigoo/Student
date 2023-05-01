@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 import 'package:student/Teacher/createclass.dart';
 import 'package:student/Teacher/createclassdetails.dart';
 import 'package:student/Teacher/menuteacher.dart';
-
-import '../controller/createclassdetails.controller.dart';
+import 'package:student/controller/createclassdetails.controller.dart';
 
 class Classlistviewteacher extends StatelessWidget {
   Classlistviewteacher({super.key});

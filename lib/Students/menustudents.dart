@@ -1,14 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Students/assignmentsstudents.dart';
-import 'package:student/Students/internalmarkstudents.dart';
-import 'package:student/Students/notesstudents.dart';
 import 'package:student/Students/semesterstudent.dart';
-import 'package:student/controller/login_controller.dart';
 
 import '../Teacher/viewstudents.dart';
+import '../controller/createclassdetails.controller.dart';
+import '../controller/login_controller.dart';
+import '../controller/markcontroller.dart';
+import 'assignmentsstudents.dart';
 import 'attendancestudents.dart';
+import 'internalmarkstudents.dart';
+import 'notesstudents.dart';
 import 'notificationstudents.dart';
 
 class StudentMenupage extends StatefulWidget {
@@ -27,6 +29,16 @@ class StudentMenupage extends StatefulWidget {
 
 class _StudentMenupageState extends State<StudentMenupage> {
   final controller = Get.put(LoginController());
+  final controller1 = Get.put(Markcontroller());
+  final controller2 = Get.put(Createclassdetailscontroller());
+  @override
+  void initState() {
+    super.initState();
+    controller1.subname = widget.subjectname;
+    controller2.subname = widget.subjectname;
+    controller2.classes = widget.classname;
+    controller2.teacher = widget.teachername;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +48,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    // addtomyclasses();
+                    controller2.addtomyclasses();
                   },
                   icon: const Icon(Icons.add))
             ],
@@ -100,9 +112,10 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(
-                            () => AttendanceStudents(
-                              classname: widget.classname,
-                            ),
+                            () => const AttendanceStudents(),
+                            arguments: {
+                              "subname": widget.subjectname
+                            }
                           );
                         },
                         child: Column(
@@ -130,9 +143,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Internalmarkstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -159,9 +170,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Semestermarkstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -196,9 +205,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Notesstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -225,9 +232,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Notificationstudentpage(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -253,10 +258,8 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Assignmentstudents(),
-                          arguments: {
-                            'subjectname' : widget.subjectname
-                          });
+                          Get.to(() => const Assignmentstudents(),
+                              arguments: {'subjectname': widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -275,49 +278,28 @@ class _StudentMenupageState extends State<StudentMenupage> {
                                 color: Color.fromARGB(255, 153, 153, 153),
                               ),
                             ),
-                             const SizedBox(
+                          ],
+                        ))
+                  ],
+                ),
+                const SizedBox(
                   height: 150,
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
-                      Get.to(() => const Studentsviewteacher());
+                      Get.to(() => const Studentsviewteacher(),
+                      arguments: {
+                        "Subjectname" : widget.subjectname
+                      });
                     },
                     child: const Text("Students List ")),
-                          ],
-                        ))
-                  ],
-                ),
               ],
             ),
           ))),
     );
   }
 
-  // //adding the students class to my class page on account page
-  // void addtomyclasses() async {
-  //   final currentuser = FirebaseAuth.instance.currentUser!.email;
-  //   await FirebaseFirestore.instance
-  //       .collection('User-Student-classes')
-  //       .doc(currentuser)
-  //       .collection('My-classes')
-  //       .add({
-  //     "Teacher Name": widget.teachername,
-  //     "Class Name": widget.classname,
-  //     "Subject Name": widget.subjectname,
-  //   });
-  //   Get.showSnackbar(const GetSnackBar(
-  //     borderRadius: 8,
-  //     padding: EdgeInsets.all(20),
-  //     messageText: Text(
-  //       'Added to My classes',
-  //       style: TextStyle(
-  //         color: Color.fromARGB(255, 161, 46, 46),
-  //       ),
-  //     ),
-  //     duration: Duration(seconds: 3),
-  //     backgroundColor: Colors.white,
-  //   ));
-  // }
+  
 }

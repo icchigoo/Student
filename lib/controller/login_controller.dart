@@ -2,8 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../create_an_account/loginpage.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();

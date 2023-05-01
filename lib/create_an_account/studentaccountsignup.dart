@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'loginpage.dart';
-import '../controller/sign_up_controller.dart';
+import 'package:student/controller/sign_up_controller.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 class Studentaccpage1 extends StatefulWidget {
   const Studentaccpage1({super.key});
@@ -164,7 +164,11 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                                 data.lastname.text,
                                 users);
                             SignUpController.instance
-                                .createuser(data.email.text, data.password.text);
+                                .createuser(data.email.text, data.password.text , data.firstname.text);
+                                data.email.clear();
+                                data.firstname.clear();
+                                data.lastname.clear();
+                                data.password.clear();
                           },
                           child: const Text('SIGN UP'),
                         ),
