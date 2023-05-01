@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -51,19 +50,9 @@ class Notificationcontroller extends GetxController{
   }
   //uploading the notification download url to the firestore database 
   void notificationregister() async{
-     var now = DateTime.now();
-    var month = now.month.toString().padLeft(2, '0');
-    var day = now.day.toString().padLeft(2, '0');
-    var time = '${now.hour}:${now.minute}  ${now.year}-$month-$day ';
-    final currentuser = FirebaseAuth.instance.currentUser!.email;
     if(formkey.currentState!.validate()){
           await FirebaseFirestore.instance.collection('Notification').doc().set({
-    "Notification" : notification.text,
-    "Time" : time
-   });
-         await FirebaseFirestore.instance.collection('User-Notification').doc(currentuser).collection('My-notification').add({
-    "Notification" : notification.text,
-    "Time" : time
+    "Notification" : notification,
    });
     }
     navigator!.pop();

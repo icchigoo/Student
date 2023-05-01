@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/sign_up_controller.dart';
 
+import '../controller/sign_up_controller.dart';
 import 'loginpage.dart';
 
 class Teacheraccpage1 extends StatefulWidget {

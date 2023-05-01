@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/create_an_account/reset_password.dart';
-import 'package:student/create_an_account/signup.dart';
-import 'package:student/home/appbar_bottomnavteacher.dart';
+
+import '../home/appbar_bottomnavteacher.dart';
+import 'signup.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);

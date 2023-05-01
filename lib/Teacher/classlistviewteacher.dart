@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Teacher/createclass.dart';
 import 'package:student/Teacher/createclassdetails.dart';
 import 'package:student/Teacher/menuteacher.dart';
+import 'package:student/controller/login_controller.dart';
 
 class Classlistviewteacher extends StatelessWidget {
   const Classlistviewteacher({super.key});
@@ -12,7 +14,7 @@ class Classlistviewteacher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Class').snapshots(),
+        stream: FirebaseFirestore.instance.collection('Class').doc(FirebaseAuth.instance.currentUser!.email).collection('i').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
@@ -21,6 +23,11 @@ class Classlistviewteacher extends StatelessWidget {
               return SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
+                   actions: [
+                   IconButton(onPressed: () {
+                    LoginController.instance.signOut();
+                   }, icon: const Icon(Icons.logout))
+                   ],
                     leading: IconButton(
                         onPressed: () {
                           Get.to(() => Createclassdetails());

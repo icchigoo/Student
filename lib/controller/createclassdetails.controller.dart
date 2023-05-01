@@ -20,13 +20,7 @@ final currentuser = FirebaseAuth.instance.currentUser!.email;
 
 void registerclass(String teachername, String classname , String subjectname) async{
   if(formkey.currentState!.validate()) {
-    await FirebaseFirestore.instance.collection('Class').add({
-      "Teacher Name" : teachername,
-      "Class Name" : classname,
-      "Subject Name" : subjectname,
-      
-    });
-       await FirebaseFirestore.instance.collection('User-Class').doc(currentuser).collection('My-Class').add({
+    await FirebaseFirestore.instance.collection('Class').doc(currentuser).collection('i').add({
       "Teacher Name" : teachername,
       "Class Name" : classname,
       "Subject Name" : subjectname,
