@@ -34,7 +34,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:const [
                       Text(
-                      'AttendEase ',
+                      'PcPsHack ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
