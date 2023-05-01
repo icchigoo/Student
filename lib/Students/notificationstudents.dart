@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/controller/notificationcontroller.dart';
@@ -42,12 +43,30 @@ class Notificationstudentpage extends StatelessWidget {
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
                         return Card(
-                        
-                          elevation: 10,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child:Text(x['Notification']),
-                          ));
+                            elevation: 10,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                        padding:
+                                          const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                      child: Text(
+                                        x["Time"],
+                                        style:const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(x['Notification']),
+                                ),
+                              ],
+                            ));
                       }),
                 );
               }

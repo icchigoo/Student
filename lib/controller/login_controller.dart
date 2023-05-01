@@ -1,6 +1,8 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
@@ -12,22 +14,20 @@ class LoginController extends GetxController {
 
   /// Authentication of the user(whether the user is signed in or not) and validation
   final _auth = FirebaseAuth.instance;
-  
 
   Future signIn(String email, String password) async {
-    try{
-      if(formkey.currentState!.validate()){
-      await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    }
-    }
-    on FirebaseAuthException catch(e){
+    try {
+      if (formkey.currentState!.validate()) {
+        await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      }
+    } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "invalid-email":
           return Get.showSnackbar(
-            const  GetSnackBar(
+            const GetSnackBar(
               margin: EdgeInsets.all(15),
               borderRadius: 8,
               message:
@@ -35,7 +35,7 @@ class LoginController extends GetxController {
               duration: Duration(seconds: 3),
               backgroundColor: Colors.red,
             ),
-          ); 
+          );
 
         case "wrong-password":
           return Get.showSnackbar(
@@ -45,13 +45,10 @@ class LoginController extends GetxController {
               message: ('The password is invalid for the given email'),
               duration: Duration(seconds: 3),
               backgroundColor: Colors.red,
-               
             ),
-            
           );
- 
+
         case "user-not-found":
-        
           return Get.showSnackbar(
             const GetSnackBar(
               margin: EdgeInsets.all(15),
@@ -63,8 +60,6 @@ class LoginController extends GetxController {
           );
       }
     }
-    
-    
   }
 
   /// TextField Validation
@@ -72,6 +67,6 @@ class LoginController extends GetxController {
   ///sign out code
   Future signOut() async {
     await _auth.signOut();
-
+    Get.offAll(() => const Loginpage());
   }
 }

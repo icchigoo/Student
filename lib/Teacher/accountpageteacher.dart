@@ -1,4 +1,6 @@
 
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Teacher/myclasses.dart';
@@ -6,6 +8,7 @@ import 'package:student/Teacher/mynotificationteacher.dart';
 import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
+import 'package:student/controller/sign_up_controller.dart';
 
 class Accountpageteacher extends StatefulWidget {
   const Accountpageteacher({super.key});
@@ -17,15 +20,21 @@ class Accountpageteacher extends StatefulWidget {
 class _ProfileteacherState extends State<Accountpageteacher> {
   final data = Get.put(LoginController());
   final data1 = Get.put(Profilepagecontroller());
+  final data2 = Get.put(SignUpController());
+  String firstname = '';
+  String lastname = '';
+  String profileurl = '';
+  String email = '';
+  User user = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
     super.initState();
     data1.collectionreferenceuser.doc(data1.currentUser).get().then((value) {
       setState(() {
-        data1.firstname = value['First Name'];
-        data1.lastname = value['Last Name'];
-        data1.email = value['E-Mail'];
+        firstname = value['First Name'];
+        lastname = value['Last Name'];
+        email = value['E-Mail'];
       });
       data1.collectionreferenceprofile
           .doc(data1.currentUser)
@@ -36,10 +45,16 @@ class _ProfileteacherState extends State<Accountpageteacher> {
         });
       });
     });
+    data2.checkEmailVerification();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (user.emailVerified) {
+      setState(() {
+        data2.isEmailVerified = true;
+      });
+    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -61,8 +76,8 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                     height: 200,
                     color: const Color.fromARGB(255, 161, 46, 46),
                   ),
-                  Positioned(top: 120, child: data1.buildprofilecover()),
-                  Positioned(top: 25, child: data1.buildusername()),
+                  Positioned(top: 120, child: buildprofilecover()),
+                  Positioned(top: 25, child: buildusername()),
                 ],
               ),
               const SizedBox(
@@ -74,7 +89,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
-                      child:  ListTile(
+                      child: ListTile(
                         onTap: () {
                           Get.to(() => const Profilepageteacher());
                         },
@@ -86,7 +101,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
-                        trailing:const  Icon(Icons.arrow_forward),
+                        trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
                   ),
@@ -94,7 +109,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
-                      child:  ListTile(
+                      child: ListTile(
                         onTap: () {
                           Get.to(() => const Myclassespage());
                         },
@@ -102,7 +117,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.school,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title:const  Text('             My Classes',
+                        title: const Text('             My Classes',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
@@ -114,11 +129,11 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
-                      child:  ListTile(
+                      child: ListTile(
                         onTap: () {
                           Get.to(() => const Mynotificationteacher());
                         },
-                        leading:const Icon(
+                        leading: const Icon(
                           Icons.notifications,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
@@ -126,8 +141,43 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
-                        trailing:const Icon(Icons.arrow_forward),
+                        trailing: const Icon(Icons.arrow_forward),
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                    child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                          onTap: () {
+                            if (!data2.isEmailVerified) {
+                              data2.sendverificationemail();
+                            } else {
+                              Get.showSnackbar(const GetSnackBar(
+                                padding: EdgeInsets.all(15),
+                                messageText: Text(
+                                    "The verification E-Mail hasn't send."),
+                              ));
+                            }
+                          },
+                          leading: const Icon(
+                            Icons.email,
+                            color: Color.fromARGB(255, 161, 46, 46),
+                          ),
+                          title: const Text('             verify E-Mail',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                          trailing: data2.isEmailVerified
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                )
+                              : const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                )),
                     ),
                   ),
                   const SizedBox(
@@ -150,24 +200,23 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       ),
                     ),
                   ),
-                  
-                        Padding(
+                  Padding(
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
-                      child:  ListTile(
+                      child: ListTile(
                         onTap: () {
                           data.signOut();
                         },
-                        leading:const  Icon(
+                        leading: const Icon(
                           Icons.logout,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title:const  Text('                 Logout',
+                        title: const Text('                 Logout',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
-                        trailing:const  Icon(Icons.arrow_forward),
+                        trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
                   ),
@@ -183,6 +232,38 @@ class _ProfileteacherState extends State<Accountpageteacher> {
       ),
     );
   }
-
- 
+  Widget buildprofilecover() {
+    return GestureDetector(
+      onTap: () {
+        data1.showPicker(context);
+      },
+      child: Container(
+       decoration: BoxDecoration(
+         color: const Color.fromARGB(255, 234, 234, 234),
+          borderRadius: BorderRadius.circular(10)
+        
+       ),
+        height: 150,
+        width: 140,
+       
+        child: SizedBox(
+          height: 130,
+          width: 200,
+          child:profileurl == ''
+              ? Image.asset('assets/user.jpg')
+              : Image.network(
+                  profileurl,
+                ),
+        ),
+      ),
+    );
+  }
+    
+  Widget buildusername() {
+    return Text(
+      '$firstname $lastname',
+      style: const TextStyle(
+          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+    );
+  }
 }

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:student/Resources/palette.dart';
-import 'package:student/create_an_account/loginpage.dart';
+import 'package:student/splashscreen/splashscreen.dart';
 import 'Resources/firebase_options.dart';
+import 'create_an_account/loginpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>const Loginpage(),
+        'splashscreen': (context) => const ScreenSplash()
       },
     );
   }
