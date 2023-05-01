@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Teacher/myclasses.dart';
+import 'package:student/Teacher/mynotificationteacher.dart';
 import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
@@ -115,13 +116,13 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       color: Colors.white,
                       child:  ListTile(
                         onTap: () {
-                          
+                          Get.to(() => const Mynotificationteacher());
                         },
                         leading:const Icon(
                           Icons.notifications,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('            Notifications',
+                        title: const Text('           My Notifications',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),

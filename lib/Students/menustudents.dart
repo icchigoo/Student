@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Students/assignmentsstudents.dart';
+import 'package:student/Students/attendancestudents.dart';
+import 'package:student/Students/internalmarkstudents.dart';
 import 'package:student/Students/notesstudents.dart';
 import 'package:student/Students/semesterstudent.dart';
 import 'package:student/controller/login_controller.dart';
 
-import 'assignmentsstudents.dart';
-import 'attendancestudents.dart';
-import 'internalmarkstudents.dart';
 import 'notificationstudents.dart';
 
 class StudentMenupage extends StatelessWidget {

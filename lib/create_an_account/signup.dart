@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/create_an_account/studentaccountsignup.dart';
 import 'package:student/create_an_account/teacheraccountsignup.dart';
+
+import 'studentaccountsignup.dart';
 
 class Signuppage extends StatelessWidget {
   const Signuppage({super.key});

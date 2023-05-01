@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/homenotificationcontroller.dart';
+import 'package:student/controller/homenotificationcontroller.dart';
 
 class HomeNotificationstudentpage extends StatelessWidget {
   HomeNotificationstudentpage({super.key});

@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Students/menustudents.dart';
 import 'package:student/Teacher/createclass.dart';
-import 'package:student/controller/login_controller.dart';
-
-import 'menustudents.dart';
 
 class Classlistviewstudents extends StatelessWidget {
   const Classlistviewstudents({super.key});
@@ -22,11 +20,6 @@ class Classlistviewstudents extends StatelessWidget {
               return SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
-                   actions: [
-                   IconButton(onPressed: () {
-                    LoginController.instance.signOut();
-                   }, icon: const Icon(Icons.logout))
-                   ],
                     centerTitle: true,
                     title: const Text('Classes'),
                   ),

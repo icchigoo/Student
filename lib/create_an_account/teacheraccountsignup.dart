@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/sign_up_controller.dart';
-import 'loginpage.dart';
+import 'package:student/controller/sign_up_controller.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 class Teacheraccpage1 extends StatefulWidget {
   const Teacheraccpage1({super.key});
@@ -89,7 +88,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                     ),
                     TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty || !value.contains('@patancollege.edu.np')) {
+                        if (value!.isEmpty || !value.contains('@')) {
                           return 'Please enter a valid email address';
                         }
                         return null;

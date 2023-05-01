@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/createclassdetails.controller.dart';
-import 'createclass.dart';
-import 'menuteacher.dart';
+import 'package:student/Teacher/menuteacher.dart';
+import 'package:student/controller/createclassdetails.controller.dart';
 
 class Myclassespage extends StatelessWidget {
   const Myclassespage({super.key});
@@ -14,11 +13,20 @@ class Myclassespage extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = Get.put(Createclassdetailscontroller());
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Class').snapshots(),
+        stream: FirebaseFirestore.instance.collection('User-Class').doc(FirebaseAuth.instance.currentUser!.email).collection('My-Class').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
-              return const Createclass();
+              return const Scaffold(
+                body:  Center(
+                  child: Text('You haven\'t added any classes',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color:  Color.fromARGB(255, 161, 46, 46),
+                    ),),
+                ),
+              );
             } else {
               return SafeArea(
                 child: Scaffold(

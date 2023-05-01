@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
-
-import '../Teacher/profilepageteacher.dart';
 
 class Accountpagestudents extends StatefulWidget {
   const Accountpagestudents({super.key});
