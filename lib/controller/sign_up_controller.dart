@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/home/appbar_bottomnavteacher.dart';
+
+import '../home/appbar_bottomnavteacher.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -22,7 +23,7 @@ class SignUpController extends GetxController {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-          Get.to(() => const Homepagelayout());
+      Get.offAll(const Homepagelayout());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         Get.showSnackbar(const GetSnackBar(
@@ -41,8 +42,8 @@ class SignUpController extends GetxController {
     }
   }
 
-  //Registering of students/teacher details to firestore
-  Future registeruserstudentsandteacher(
+  //Registering of teacher/students details to firestore
+  Future registeruserteacherandstudent(
       String email, String firstname, String lastname, String users) async {
     if (formkey.currentState!.validate()) {
       await FirebaseFirestore.instance.collection('User').doc(email).set({
@@ -53,6 +54,8 @@ class SignUpController extends GetxController {
       });
     }
   }
+
+
 
   //code for verification of email which is displayed on the account page
   bool isEmailVerified = false;

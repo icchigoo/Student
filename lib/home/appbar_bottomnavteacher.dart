@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:student/Students/accountpagestudent.dart';
-import 'package:student/Students/classlistviewstudetnts.dart';
 import 'package:student/Students/homenotificationstudents.dart';
 import 'package:student/Teacher/accountpageteacher.dart';
-import 'package:student/Teacher/classlistviewteacher.dart';
 import 'package:student/Teacher/homenotificationteacher.dart';
-import 'package:student/home/calendar.dart';
+
+import '../Students/accountpagestudent.dart';
+import '../Students/classlistviewstudetnts.dart';
+import '../Teacher/classlistviewteacher.dart';
 
 
 class Homepagelayout extends StatefulWidget {
@@ -49,14 +49,12 @@ class _HomepagelayoutState extends State<Homepagelayout> {
   int pageIndex = 0;
 
   final teacherpages = [
-    const Classlistviewteacher(),
-    const Calendar(),
+     Classlistviewteacher(),
     HomeNotificationteacherpage(),
     const Accountpageteacher(),
   ];
   final studentPages = [
     const Classlistviewstudents(),
-    const Calendar(),
     HomeNotificationstudentpage(),
     const Accountpagestudents(),
   ];
@@ -95,6 +93,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
                         size: 35,
                       ),
               ),
+             
               IconButton(
                 enableFeedback: false,
                 onPressed: () {
@@ -103,25 +102,6 @@ class _HomepagelayoutState extends State<Homepagelayout> {
                   });
                 },
                 icon: pageIndex == 1
-                    ? const Icon(
-                        Icons.calendar_month,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        size: 35,
-                      )
-                    : const Icon(
-                        Icons.calendar_month_outlined,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-              ),
-              IconButton(
-                enableFeedback: false,
-                onPressed: () {
-                  setState(() {
-                    pageIndex = 2;
-                  });
-                },
-                icon: pageIndex == 2
                     ? const Icon(
                         Icons.notifications,
                         color: Color.fromARGB(255, 0, 0, 0),
@@ -137,10 +117,10 @@ class _HomepagelayoutState extends State<Homepagelayout> {
                 enableFeedback: false,
                 onPressed: () {
                   setState(() {
-                    pageIndex = 3;
+                    pageIndex = 2;
                   });
                 },
-                icon: pageIndex == 3
+                icon: pageIndex == 2
                     ? const Icon(
                         Icons.person,
                         color: Color.fromARGB(255, 0, 0, 0),

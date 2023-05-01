@@ -1,9 +1,9 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/sign_up_controller.dart';
-import 'package:student/create_an_account/loginpage.dart';
+
+import '../controller/sign_up_controller.dart';
+import 'loginpage.dart';
 
 class Studentaccpage1 extends StatefulWidget {
   const Studentaccpage1({super.key});
@@ -157,7 +157,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(350, 50)),
                           onPressed: () async {
-                            SignUpController.instance.registeruserstudentsandteacher(
+                            SignUpController.instance.registeruserteacherandstudent(
                                 data.email.text,
                                 data.firstname.text,
                                 data.lastname.text,

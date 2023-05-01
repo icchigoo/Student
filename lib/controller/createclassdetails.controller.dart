@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/home/appbar_bottomnavteacher.dart';
+
+import '../home/appbar_bottomnavteacher.dart';
 
 class Createclassdetailscontroller extends GetxController{
-  static Createclassdetailscontroller get instance => Get.find();
 
 
 ///Textformfield variable declaration
@@ -26,13 +26,13 @@ void registerclass(String teachername, String classname , String subjectname) as
       "Subject Name" : subjectname,
       
     });
-       await FirebaseFirestore.instance.collection('User-Class').doc(currentuser).collection('My-Class').add({
+       await FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser!.email).collection('Subject').doc(subjectname).set({
       "Teacher Name" : teachername,
       "Class Name" : classname,
       "Subject Name" : subjectname,
       
     });
-    Get.to(() => const Homepagelayout());
+    Get.offAll(() => const Homepagelayout());
   }
 }
 }

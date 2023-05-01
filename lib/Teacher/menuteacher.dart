@@ -7,6 +7,7 @@ import 'package:student/Teacher/internalmarkteacher.dart';
 import 'package:student/Teacher/notesteacher.dart';
 import 'package:student/Teacher/notificationteacher.dart';
 import 'package:student/Teacher/semestermarkteacher.dart';
+import 'package:student/controller/attendancecontroller.dart';
 import 'package:student/controller/login_controller.dart';
 
 class TeacherMenupage extends StatelessWidget {
@@ -19,6 +20,7 @@ class TeacherMenupage extends StatelessWidget {
   final String teachername;
   final String classname;
   final String subjectname;
+  final data = Get.put(Countercontroller());
 
   @override
   Widget build(BuildContext context) {
@@ -38,216 +40,249 @@ class TeacherMenupage extends StatelessWidget {
           ),
           body: (Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                SizedBox(
-                  width: 250,
-                  height: 70,
-                  child: Card(
-                    elevation: 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          classname,
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        ),
-                        const VerticalDivider(
-                          thickness: 2,
-                          indent: 20,
-                          endIndent: 20,
-                          color: Color.fromARGB(255, 153, 153, 153),
-                        ),
-                        Text(
-                          teachername,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    width: 250,
+                    height: 70,
+                    child: Card(
+                      elevation: 10,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            classname,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
                           ),
-                        )
-                      ],
+                          const VerticalDivider(
+                            thickness: 2,
+                            indent: 20,
+                            endIndent: 20,
+                            color: Color.fromARGB(255, 153, 153, 153),
+                          ),
+                          Text(
+                            teachername,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 90,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>   AttendanceTeacher(classname: classname,),);
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/attendance.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Text(
-                              'Attendance',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                  const SizedBox(
+                    height: 90,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>   const AttendanceTeacher());
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/attendance.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                               ),
-                            )
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>  Internalmarkteacher());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/internalandsem.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
-                              'Internal\n  Mark',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                              const SizedBox(
+                                height: 15,
                               ),
-                            )
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>  Semestermarkteacher());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/sem.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
-                              'Semester\n    Mark',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                              const Text(
+                                'Attendance',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>  Internalmarkteacher(),arguments:{ 
+                              "subjectname" : subjectname});
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/internalandsem.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                               ),
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>  Notesteacher());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/note.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              'Notes',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                              const SizedBox(
+                                height: 5,
                               ),
-                            )
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>  Notificationteacherpage());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/notification.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              'Notification',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                              const Text(
+                                'Internal\n  Mark',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>  Semestermarkteacher(),
+                            arguments: {
+                              "subject" : subjectname
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/sem.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                               ),
-                            )
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            minimumSize: const Size(120, 100)),
-                        onPressed: () {
-                          Get.to(() =>   Assignmentteacher());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/assignment.png',
-                              width: 50,
-                              height: 50,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              'Assignment',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 153, 153, 153),
+                              const SizedBox(
+                                height: 5,
                               ),
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-              ],
+                              const Text(
+                                'Semester\n    Mark',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>  Notesteacher(),
+                            arguments: {
+                              "subjectname" : subjectname
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/note.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                'Notes',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>  Notificationteacherpage(),
+                            arguments: {
+                              "subjectname" : subjectname
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/notification.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                'Notification',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(120, 100)),
+                          onPressed: () {
+                            Get.to(() =>   Assignmentteacher());
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/assignment.png',
+                                width: 50,
+                                height: 50,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                'Assignment',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 153, 153, 153),
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 150,
+                  ),
+                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(350,50)
+                    ),
+                    onPressed: () {
+                    //view students list 
+                  }, child:const Text("Students List ")),
+                  const SizedBox(
+                    height: 1,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(350,50)
+                    ),
+                    onPressed: () {
+                    data.addstudents(context);
+                  }, child:const Text("Add Students"))
+                ],
+              ),
             ),
-          ))),
+          )),
+          ),
     );
   }
 }

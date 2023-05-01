@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/controller/markcontroller.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Internalmarkstudent extends StatelessWidget {
    Internalmarkstudent({super.key});
@@ -61,28 +61,28 @@ class Internalmarkstudent extends StatelessWidget {
   }
 }
 
-class View extends StatefulWidget {
-  const View({super.key});
+// class View extends StatefulWidget {
+//   const View({super.key});
 
-  @override
-  State<View> createState() => _ViewState();
-}
+//   @override
+//   State<View> createState() => _ViewState();
+// }
 
-class _ViewState extends State<View> {
-  final _pdfViewerController = PdfViewerController();
+// class _ViewState extends State<View> {
+//   final _pdfViewerController = PdfViewerController();
 
-  final data = Get.put(Markcontroller());
+//   final data = Get.put(Markcontroller());
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('pdf viewer'),
-      ),
-      body: SfPdfViewer.network(
-        data.pdfurl,
-        controller: _pdfViewerController,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('pdf viewer'),
+//       ),
+//       body: SfPdfViewer.network(
+//         data.pdfurl,
+//         controller: _pdfViewerController,
+//       ),
+//     );
+//   }
+// }

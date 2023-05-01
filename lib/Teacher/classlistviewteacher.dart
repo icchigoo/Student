@@ -1,18 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Teacher/createclass.dart';
 import 'package:student/Teacher/createclassdetails.dart';
 import 'package:student/Teacher/menuteacher.dart';
+import 'package:student/controller/createclassdetails.controller.dart';
 
 class Classlistviewteacher extends StatelessWidget {
-  const Classlistviewteacher({super.key});
+     Classlistviewteacher({super.key});
+  final data = Get.put(Createclassdetailscontroller());
 
   @override
   Widget build(BuildContext context) {
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Class').snapshots(),
+        stream:  FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser!.email).collection('Subject').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
@@ -127,7 +130,14 @@ class Classlistviewteacher extends StatelessWidget {
             }
           } else {
             return const Center(
-              child: Text('Soasdlmasdkfn'),
+              child:Text(
+                    'Something went wrong',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 161, 46, 46),
+                    ),
+                  ),
             );
           }
         },

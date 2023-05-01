@@ -1,5 +1,4 @@
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,14 +29,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
   @override
   void initState() {
     super.initState();
-    data1.collectionreferenceuser.doc(data1.currentUser).get().then((value) {
+    data1.collectionreferenceuser.doc(FirebaseAuth.instance.currentUser!.email).get().then((value) {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];
         email = value['E-Mail'];
       });
-      data1.collectionreferenceprofile
-          .doc(data1.currentUser)
+      data1.collectionreferenceuser
+          .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
         setState(() {

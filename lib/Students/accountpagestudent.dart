@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Students/myclassesstudents.dart';
-import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/controller/login_controller.dart';
-import 'package:student/controller/profilecontrollerpage.dart';
-import 'package:student/controller/sign_up_controller.dart';
+
+import '../Teacher/profilepageteacher.dart';
+import '../controller/profilecontrollerpage.dart';
+import '../controller/sign_up_controller.dart';
+import 'myclassesstudents.dart';
 
 class Accountpagestudents extends StatefulWidget {
   const Accountpagestudents({super.key});
@@ -22,8 +24,8 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
    String firstname = '';
   String lastname = '';
   String email = '';
-  String profileurl = ''
-;  User user = FirebaseAuth.instance.currentUser!;
+  String profileurl = '';
+  User user = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
         lastname = value['Last Name'];
         email = value['E-Mail'];
       });
-      data1.collectionreferenceprofile
+     FirebaseFirestore.instance.collection('User')
           .doc(data1.currentUser)
           .get()
           .then((value) {
@@ -229,9 +231,7 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
           width: 200,
           child:profileurl == ''
               ? Image.asset('assets/user.jpg')
-              : Image.network(
-                  profileurl,
-                ),
+              : Image.network(profileurl)
         ),
       ),
     );

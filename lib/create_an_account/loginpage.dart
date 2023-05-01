@@ -1,5 +1,4 @@
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +16,7 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   final controller = Get.put(LoginController());
+
 
   @override
   Widget build(BuildContext context) {
