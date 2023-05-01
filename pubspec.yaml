@@ -45,6 +45,9 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^20.4.51
   file_picker: ^5.2.5
   syncfusion_flutter_calendar: ^20.4.52
+  firebase_database: ^10.0.14
+  image_picker: ^0.8.6
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +65,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+       - asset: fonts/MyFlutterApp.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

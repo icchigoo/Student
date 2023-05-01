@@ -45,6 +45,43 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:5172518899:android:21f6ff09172b288ad2fc86",
+        "android_client_info": {
+          "package_name": "com.example.collegeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5172518899-fgc6qrdevk774lkm27p9buqaiugbht20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.collegeproject",
+            "certificate_hash": "6ff86058500eb6bba6f34db1dcece613b606541d"
+          }
+        },
+        {
+          "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYPruK7Z9Unw6d8qnhh9dK2KRqBVswroo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:5172518899:android:e1d85a1979c38ee8d2fc86",
         "android_client_info": {
           "package_name": "com.example.fitness_gym_app"
@@ -86,6 +123,117 @@
           "android_info": {
             "package_name": "com.example.fitpad",
             "certificate_hash": "a7721f7bddcb3faa9bfdac666ed0ce29aca9b48e"
+          }
+        },
+        {
+          "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYPruK7Z9Unw6d8qnhh9dK2KRqBVswroo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5172518899:android:67fb55545360e47ad2fc86",
+        "android_client_info": {
+          "package_name": "com.example.niet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5172518899-22radmnakdlccqi677sp08c7lli65bnh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.niet_app",
+            "certificate_hash": "6ff86058500eb6bba6f34db1dcece613b606541d"
+          }
+        },
+        {
+          "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYPruK7Z9Unw6d8qnhh9dK2KRqBVswroo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5172518899:android:6748ec4d16fe7d39d2fc86",
+        "android_client_info": {
+          "package_name": "com.example.notification_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5172518899-01qb1tnkp019jsu0rsuntr40sknhqjp7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notification_system",
+            "certificate_hash": "6ff86058500eb6bba6f34db1dcece613b606541d"
+          }
+        },
+        {
+          "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYPruK7Z9Unw6d8qnhh9dK2KRqBVswroo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5172518899:android:f6ba1afa0c7acf53d2fc86",
+        "android_client_info": {
+          "package_name": "com.example.notificationsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5172518899-q9fvvs7fc5j7apfe7or185063ul7ov4b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notificationsystem",
+            "certificate_hash": "6ff86058500eb6bba6f34db1dcece613b606541d"
           }
         },
         {
@@ -154,6 +302,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "5172518899-lrpbb21v7m0m6f5v68hvfhd1489fnrfc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.student",
+            "certificate_hash": "d2c7505821d71ab042a42e317e08911a28bbc064"
+          }
+        },
         {
           "client_id": "5172518899-27q2t8r7m95us376r5luu464bh34ll38.apps.googleusercontent.com",
           "client_type": 3

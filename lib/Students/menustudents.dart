@@ -6,9 +6,8 @@ import 'package:student/Students/attendancestudents.dart';
 import 'package:student/Students/internalmarkstudents.dart';
 import 'package:student/Students/notesstudents.dart';
 import 'package:student/Students/notificationstudents.dart';
+import 'package:student/Students/semesterstudent.dart';
 import 'package:student/controller/login_controller.dart';
-
-import 'semesterstudent.dart';
 
 class StudentMenupage extends StatelessWidget {
   StudentMenupage(
