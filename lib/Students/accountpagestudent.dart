@@ -1,17 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:student/Teacher/profilepageteacher.dart';
 import 'package:student/controller/login_controller.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
 
-class Profilestudents extends StatefulWidget {
-  const Profilestudents({super.key});
+class Accountpagestudents extends StatefulWidget {
+  const Accountpagestudents({super.key});
 
   @override
-  State<Profilestudents> createState() => _ProfilestudentsState();
+  State<Accountpagestudents> createState() => _AccountpagestudentsState();
 }
 
-class _ProfilestudentsState extends State<Profilestudents> {
+class _AccountpagestudentsState extends State<Accountpagestudents> {
   final data = Get.put(LoginController());
   final data1 = Get.put(Profilepagecontroller());
 
@@ -46,13 +47,6 @@ class _ProfilestudentsState extends State<Profilestudents> {
             'Account',
             style: TextStyle(fontSize: 25),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  data.signOut();
-                },
-                icon: const Icon(Icons.logout))
-          ],
         ),
         body: Column(
           children: [
@@ -79,7 +73,7 @@ class _ProfilestudentsState extends State<Profilestudents> {
                     color: Colors.white,
                     child:  ListTile(
                       onTap: () {
-                        
+                        Get.to(() => const Profilepageteacher());
                       },
                       leading: const Icon(
                         Icons.person,
@@ -153,9 +147,29 @@ class _ProfilestudentsState extends State<Profilestudents> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                    child: Container(
+                      color: Colors.white,
+                      child:  ListTile(
+                        onTap: () {
+                          data.signOut();
+                        },
+                        leading:const Icon(
+                          Icons.logout,
+                          color: Color.fromARGB(255, 161, 46, 46),
+                        ),
+                        title:const  Text('                 Logout',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
+                        trailing:const  Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 const Text('AttendEase 2023')
               ],
             )

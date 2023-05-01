@@ -90,7 +90,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                     ),
                     TextFormField(
                        validator: (value) {
-                        if (value!.isEmpty || !value.contains('@')) {
+                        if (value!.isEmpty || !value.contains('@patancollege.edu.np')) {
                           return 'Please enter a valid email address';
                         }
                         return null;
