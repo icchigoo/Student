@@ -4,14 +4,15 @@ import 'package:get/get.dart';
 import 'package:student/controller/sign_up_controller.dart';
 import 'package:student/create_an_account/loginpage.dart';
 
-class Studentaccpage1 extends StatefulWidget {
-  const Studentaccpage1({super.key});
+class Teacheraccpage1 extends StatefulWidget {
+  const Teacheraccpage1({super.key});
 
   @override
-  State<Studentaccpage1> createState() => _Studentaccpage1State();
+  State<Teacheraccpage1> createState() => _Teacheraccpage1State();
 }
 
-class _Studentaccpage1State extends State<Studentaccpage1> {
+class _Teacheraccpage1State extends State<Teacheraccpage1> {
+  final users = Get.arguments['user'];
   final data = Get.put(SignUpController());
   void _toggle() {
     setState(() {
@@ -36,15 +37,12 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                 padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
                 child: Column(
                   children: [
-                    Row(
-                      children: const [
-                        Text('Please Enter Your Details',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey
-                        ),)
-                      ],
-                    ),
+                    Row(children: const [
+                       Text(
+                        'Please Enter Your Details',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      ),
+                    ]),
                     const SizedBox(
                       height: 20,
                     ),
@@ -60,8 +58,8 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       }),
                       controller: data.firstname,
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(),
                         labelText: 'First Name',
                       ),
                     ),
@@ -80,31 +78,33 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       }),
                       controller: data.lastname,
                       decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Last Name',
-                          prefixIcon: Icon(Icons.person)),
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(),
+                        labelText: 'Last Name',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
-                       validator: (value) {
-                        if (value!.isEmpty || !value.contains('@patancollege.edu.np')) {
+                      validator: (value) {
+                        if (value!.isEmpty || !value.contains('@')) {
                           return 'Please enter a valid email address';
                         }
                         return null;
                       },
                       controller: data.email,
                       decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'E-mail ',
-                          prefixIcon: Icon(Icons.email)),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
+                        labelText: 'E-mail',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
-                       validator: ((value) {
+                      validator: ((value) {
                         if(value!.isEmpty){
                           return 'Please Enter Password';
                         }
@@ -118,21 +118,22 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       controller: data.password,
                       obscureText: data.obscureText,
                       decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            onPressed: _toggle,
-                            icon: data.obscureText
-                                ? const Icon(Icons.visibility)
-                                : const Icon(Icons.visibility_off),
-                          ),
-                          border: const OutlineInputBorder(),
-                          labelText: 'Password ',
-                          prefixIcon: const Icon(Icons.fingerprint)),
+                        suffixIcon: IconButton(
+                          onPressed: _toggle,
+                          icon: data.obscureText
+                              ? const Icon(Icons.visibility)
+                              : const Icon(Icons.visibility_off),
+                        ),
+                        prefixIcon: const Icon(Icons.fingerprint),
+                        border: const OutlineInputBorder(),
+                        labelText: 'Password ',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
-                       validator: ((value) {
+                      validator: ((value) {
                         if (value != data.password.text) {
                           return 'The password don\'t match ';
                         } else {
@@ -141,9 +142,10 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       }),
                       obscureText: true,
                       decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password Confirmation',
-                          prefixIcon: Icon(Icons.fingerprint)),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.fingerprint),
+                        labelText: 'Password Confirmation',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -154,17 +156,21 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(350, 50)),
-                          onPressed: () async {
-                            SignUpController.instance.registeruserstudents(
-                                data.email.text,
-                                data.firstname.text,
-                                data.lastname.text);
+                          onPressed: () {
                             SignUpController.instance
                                 .createuser(data.email.text, data.password.text);
+                            SignUpController.instance.registeruserstudentsandteacher(
+                                data.email.text,
+                                data.firstname.text,
+                                data.lastname.text,
+                                users);
                           },
-                          child: const Text('SIGN UP'),
+                          child: const Text('Sign Up'),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       const Text(

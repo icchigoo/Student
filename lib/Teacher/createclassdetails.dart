@@ -26,7 +26,7 @@ class Createclassdetails extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.grey),
                 ),
                 const SizedBox(
-                  height: 120,
+                  height: 20,
                 ),
                 Container(
                   padding: const EdgeInsets.all(0),

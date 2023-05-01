@@ -42,7 +42,9 @@ class Internalmarkteacher extends StatelessWidget {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Text(x['PDF download url']);
+                        return Card(
+                          elevation: 5,
+                          child: Text(x['PDF download url']));
                       }),
                 );
               }

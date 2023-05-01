@@ -1,10 +1,8 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Teacher/classlistview.dart';
+import 'package:student/Teacher/classlistviewteacher.dart';
 
 class Createclassdetailscontroller extends GetxController{
   static Createclassdetailscontroller get instance => Get.find();
@@ -26,7 +24,7 @@ void registerclass(String teachername, String classname , String subjectname) as
       "Subject Name" : subjectname,
       
     });
-    Get.to(() => const Classlistview());
+    Get.to(() => const Classlistviewteacher());
   }
 }
 }

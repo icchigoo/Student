@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Teacher/createclass.dart';
 import 'package:student/Teacher/createclassdetails.dart';
-import 'package:student/Teacher/menu.dart';
+import 'package:student/Teacher/menuteacher.dart';
 import 'package:student/controller/login_controller.dart';
 
-class Classlistview extends StatelessWidget {
-  const Classlistview({super.key});
+class Classlistviewteacher extends StatelessWidget {
+  const Classlistviewteacher({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class Classlistview extends StatelessWidget {
                                     const EdgeInsets.fromLTRB(50, 30, 50, 15),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.to(() =>  Menupage(
+                                    Get.to(() =>  TeacherMenupage(
                                       teachername : documentSnapshot['Teacher Name'],
                                       classname : documentSnapshot['Class Name'],
                                        subjectname : documentSnapshot['Subject Name']

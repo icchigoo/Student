@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/attendancecontroller.dart';
+
+import '../controller/attendancecontroller.dart';
 
 class AttendanceTeacher extends StatelessWidget {
   AttendanceTeacher({super.key, required this.classname});

@@ -33,7 +33,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:const [
                     Text(
-                    ' STUDENT \n System \n Addvanced',
+                    ' STUDENT \n System \n Advance',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
