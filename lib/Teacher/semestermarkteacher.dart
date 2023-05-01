@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-       
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/markcontroller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
+import '../controller/markcontroller.dart';
 
 class Semestermarkteacher extends StatelessWidget {
    Semestermarkteacher({super.key});

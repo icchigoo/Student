@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/create_an_account/loginpage.dart';
+
+import '../create_an_account/loginpage.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
