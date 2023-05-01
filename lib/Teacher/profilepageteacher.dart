@@ -2,7 +2,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/profilecontrollerpage.dart';
+
+import '../controller/profilecontrollerpage.dart';
 
 class Profilepageteacher extends StatefulWidget {
   const Profilepageteacher({super.key});
@@ -13,14 +14,20 @@ class Profilepageteacher extends StatefulWidget {
 
 class _ProfilepageteacherState extends State<Profilepageteacher> {
   final data1 = Get.put(Profilepagecontroller());
+  String firstname = '';
+  String lastname = '';
+  String email = '';
   @override
   void initState() {
     super.initState();
     setState(() {
-      data1.collectionreferenceuser.doc(FirebaseAuth.instance.currentUser!.email).get().then((value) {
-        data1.firstname = value['First Name'];
-        data1.lastname = value['Last Name'];
-        data1.email = value['E-Mail'];
+      data1.collectionreferenceuser
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .get()
+          .then((value) {
+        firstname = value['First Name'];
+        lastname = value['Last Name'];
+        email = value['E-Mail'];
       });
     });
   }
@@ -45,7 +52,7 @@ class _ProfilepageteacherState extends State<Profilepageteacher> {
                 ),
                 IconButton(
                     onPressed: () {
-                      //updating the email
+                      data1.showUsernameupdate(context);
                     },
                     icon: const Icon(Icons.update))
               ],
@@ -54,7 +61,7 @@ class _ProfilepageteacherState extends State<Profilepageteacher> {
               height: 10,
             ),
             Text(
-              '${data1.firstname} ${data1.lastname}',
+              '$firstname $lastname',
               style: const TextStyle(fontSize: 20),
             ),
             const Divider(
@@ -63,17 +70,23 @@ class _ProfilepageteacherState extends State<Profilepageteacher> {
               endIndent: 45,
               color: Colors.black,
             ),
-            const Text(
-              'E-Mail',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Row(
+              children: const [
+                Text(
+                  'E-Mail',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                
+              ],
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              data1.email,
+              email,
               style: const TextStyle(fontSize: 20),
             ),
+           
           ],
         ),
       ),

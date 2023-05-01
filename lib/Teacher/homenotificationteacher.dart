@@ -17,7 +17,9 @@ class HomeNotificationteacherpage extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('College Notification')
+              .collection('Teacher')
+              .doc('Home-Notification')
+              .collection('i')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
@@ -47,15 +49,17 @@ class HomeNotificationteacherpage extends StatelessWidget {
                             child: Column(
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                        padding:
+                                      padding:
                                           const EdgeInsets.fromLTRB(0, 5, 5, 0),
                                       child: Text(
                                         x["Time"],
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w500,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ),
@@ -72,7 +76,12 @@ class HomeNotificationteacherpage extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(x['Notification']),
+                                  child: Text(
+                                    x['Notification'],
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ));

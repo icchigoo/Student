@@ -8,6 +8,7 @@ import 'package:student/controller/markcontroller.dart';
 class Notesstudent extends StatelessWidget {
    Notesstudent({super.key});
   final data = Get.put(Markcontroller());
+  final subname = Get.arguments["subname"];
   @override
   Widget build(BuildContext context) {
    
@@ -18,7 +19,7 @@ class Notesstudent extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Note PDF')
+              .collection('Teacher').doc(subname).collection("Notes")
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
@@ -42,7 +43,11 @@ class Notesstudent extends StatelessWidget {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Text(x['PDF download url']);
+                         return Card(
+                          
+                          child: GestureDetector(
+                            // onTap: () => const View(),
+                            child: Text(x['PDF name'])));
                       }),
                 );
               }

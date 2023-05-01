@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/markcontroller.dart';
+
+import '../controller/markcontroller.dart';
 // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Notesteacher extends StatelessWidget {
@@ -72,22 +73,13 @@ class Notesteacher extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              notesregisterpdf();
+              data.notesregisterpdf();
             }),
       ),
     );
   }
 
-  //uploading the note pdf download url to the firestore database
-  void notesregisterpdf() async {
-    await FirebaseFirestore.instance
-        .collection('User')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("Subject")
-        .doc(subname)
-        .collection("Notes")
-        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
-  }
+
 }
 
 // class View extends StatefulWidget {

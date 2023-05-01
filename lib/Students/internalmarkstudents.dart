@@ -8,6 +8,7 @@ import 'package:student/controller/markcontroller.dart';
 class Internalmarkstudent extends StatelessWidget {
    Internalmarkstudent({super.key});
   final data = Get.put(Markcontroller());
+  final subname = Get.arguments['subname'];
   @override
   Widget build(BuildContext context) {
    
@@ -18,7 +19,7 @@ class Internalmarkstudent extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Internal Mark PDF')
+              .collection('Teacher').doc(subname).collection('Internal-mark')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {

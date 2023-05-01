@@ -2,10 +2,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/login_controller.dart';
-import 'package:student/create_an_account/reset_password.dart';
-import 'package:student/create_an_account/signup.dart';
-import 'package:student/home/appbar_bottomnavteacher.dart';
+import '../controller/login_controller.dart';
+import '../controller/sign_up_controller.dart';
+import 'reset_password.dart';
+import 'signup.dart';
+
+import '../home/appbar_bottomnavteacher.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -15,8 +17,19 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  final formkey = GlobalKey<FormState>();
   final controller = Get.put(LoginController());
-
+  final data = Get.put(SignUpController());
+  @override
+  void initState() {
+    super.initState();
+    controller.formkey = formkey;
+  }
+  void _toggle() {
+    setState(() {
+      data.obscureText = !data.obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,7 @@ class _LoginpageState extends State<Loginpage> {
                 return const Homepagelayout();
               } else {
                 return Form(
-                  key: controller.formkey,
+                  key: formkey,
                   child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: ListView(
@@ -77,11 +90,17 @@ class _LoginpageState extends State<Loginpage> {
                                 }
                                 return null;
                               },
-                              obscureText: true,
+                              obscureText: data.obscureText,
                               controller: controller.password,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.fingerprint),
-                                border: OutlineInputBorder(),
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: _toggle,
+                                  icon: data.obscureText
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                                prefixIcon: const Icon(Icons.fingerprint),
+                                border: const OutlineInputBorder(),
                                 labelText: 'Password',
                               ),
                             ),

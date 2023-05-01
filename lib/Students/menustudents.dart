@@ -1,26 +1,32 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student/Students/assignmentsstudents.dart';
-import 'package:student/Students/attendancestudents.dart';
 import 'package:student/Students/internalmarkstudents.dart';
 import 'package:student/Students/notesstudents.dart';
-import 'package:student/Students/notificationstudents.dart';
 import 'package:student/Students/semesterstudent.dart';
 import 'package:student/controller/login_controller.dart';
 
-class StudentMenupage extends StatelessWidget {
-  StudentMenupage(
+import '../Teacher/viewstudents.dart';
+import 'attendancestudents.dart';
+import 'notificationstudents.dart';
+
+class StudentMenupage extends StatefulWidget {
+  const StudentMenupage(
       {super.key,
       required this.teachername,
       required this.classname,
       required this.subjectname});
-  final controller = Get.put(LoginController());
   final String teachername;
   final String classname;
   final String subjectname;
+
+  @override
+  State<StudentMenupage> createState() => _StudentMenupageState();
+}
+
+class _StudentMenupageState extends State<StudentMenupage> {
+  final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +36,13 @@ class StudentMenupage extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    addtomyclasses();
+                    // addtomyclasses();
                   },
                   icon: const Icon(Icons.add))
             ],
             centerTitle: true,
             title: Text(
-              subjectname,
+              widget.subjectname,
               style: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -61,7 +67,7 @@ class StudentMenupage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          classname,
+                          widget.classname,
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),
@@ -72,7 +78,7 @@ class StudentMenupage extends StatelessWidget {
                           color: Color.fromARGB(255, 153, 153, 153),
                         ),
                         Text(
-                          teachername,
+                          widget.teachername,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -95,7 +101,7 @@ class StudentMenupage extends StatelessWidget {
                         onPressed: () {
                           Get.to(
                             () => AttendanceStudents(
-                              classname: classname,
+                              classname: widget.classname,
                             ),
                           );
                         },
@@ -123,7 +129,10 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Internalmarkstudent());
+                          Get.to(() => Internalmarkstudent(),
+                          arguments: {
+                            "subname" : widget.subjectname
+                          });
                         },
                         child: Column(
                           children: [
@@ -149,7 +158,10 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Semestermarkstudent());
+                          Get.to(() => Semestermarkstudent(),
+                          arguments: {
+                            "subname" : widget.subjectname
+                          });
                         },
                         child: Column(
                           children: [
@@ -183,7 +195,10 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Notesstudent());
+                          Get.to(() => Notesstudent(),
+                          arguments: {
+                            "subname" : widget.subjectname
+                          });
                         },
                         child: Column(
                           children: [
@@ -209,7 +224,10 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Notificationstudentpage());
+                          Get.to(() => Notificationstudentpage(),
+                          arguments: {
+                            "subname" : widget.subjectname
+                          });
                         },
                         child: Column(
                           children: [
@@ -237,7 +255,7 @@ class StudentMenupage extends StatelessWidget {
                         onPressed: () {
                           Get.to(() => Assignmentstudents(),
                           arguments: {
-                            'subjectname' : subjectname
+                            'subjectname' : widget.subjectname
                           });
                         },
                         child: Column(
@@ -256,7 +274,17 @@ class StudentMenupage extends StatelessWidget {
                               style: TextStyle(
                                 color: Color.fromARGB(255, 153, 153, 153),
                               ),
-                            )
+                            ),
+                             const SizedBox(
+                  height: 150,
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(350, 50)),
+                    onPressed: () {
+                      Get.to(() => const Studentsviewteacher());
+                    },
+                    child: const Text("Students List ")),
                           ],
                         ))
                   ],
@@ -267,29 +295,29 @@ class StudentMenupage extends StatelessWidget {
     );
   }
 
-  //adding the students class to my class page on account page
-  void addtomyclasses() async {
-    final currentuser = FirebaseAuth.instance.currentUser!.email;
-    await FirebaseFirestore.instance
-        .collection('User-Student-classes')
-        .doc(currentuser)
-        .collection('My-classes')
-        .add({
-      "Teacher Name": teachername,
-      "Class Name": classname,
-      "Subject Name": subjectname,
-    });
-    Get.showSnackbar(const GetSnackBar(
-      borderRadius: 8,
-      padding: EdgeInsets.all(20),
-      messageText: Text(
-        'Added to My classes',
-        style: TextStyle(
-          color: Color.fromARGB(255, 161, 46, 46),
-        ),
-      ),
-      duration: Duration(seconds: 3),
-      backgroundColor: Colors.white,
-    ));
-  }
+  // //adding the students class to my class page on account page
+  // void addtomyclasses() async {
+  //   final currentuser = FirebaseAuth.instance.currentUser!.email;
+  //   await FirebaseFirestore.instance
+  //       .collection('User-Student-classes')
+  //       .doc(currentuser)
+  //       .collection('My-classes')
+  //       .add({
+  //     "Teacher Name": widget.teachername,
+  //     "Class Name": widget.classname,
+  //     "Subject Name": widget.subjectname,
+  //   });
+  //   Get.showSnackbar(const GetSnackBar(
+  //     borderRadius: 8,
+  //     padding: EdgeInsets.all(20),
+  //     messageText: Text(
+  //       'Added to My classes',
+  //       style: TextStyle(
+  //         color: Color.fromARGB(255, 161, 46, 46),
+  //       ),
+  //     ),
+  //     duration: Duration(seconds: 3),
+  //     backgroundColor: Colors.white,
+  //   ));
+  // }
 }

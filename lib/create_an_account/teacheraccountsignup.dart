@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/sign_up_controller.dart';
-import 'package:student/create_an_account/loginpage.dart';
+import '../controller/sign_up_controller.dart';
+
+import 'loginpage.dart';
 
 class Teacheraccpage1 extends StatefulWidget {
   const Teacheraccpage1({super.key});
@@ -47,6 +48,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                       height: 20,
                     ),
                     TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'The field is required';
@@ -67,6 +69,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                       height: 20,
                     ),
                     TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'The field is required';

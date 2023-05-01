@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
-import 'package:student/Students/homenotificationstudents.dart';
-import 'package:student/Teacher/accountpageteacher.dart';
-import 'package:student/Teacher/homenotificationteacher.dart';
 
 import '../Students/accountpagestudent.dart';
 import '../Students/classlistviewstudetnts.dart';
+import '../Students/homenotificationstudents.dart';
+import '../Teacher/accountpageteacher.dart';
 import '../Teacher/classlistviewteacher.dart';
+import '../Teacher/homenotificationteacher.dart';
 
 
 class Homepagelayout extends StatefulWidget {
@@ -54,7 +52,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
     const Accountpageteacher(),
   ];
   final studentPages = [
-    const Classlistviewstudents(),
+    Classlistviewstudents(),
     HomeNotificationstudentpage(),
     const Accountpagestudents(),
   ];

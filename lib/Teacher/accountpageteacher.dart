@@ -1,13 +1,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/Teacher/myclasses.dart';
-import 'package:student/Teacher/mynotificationteacher.dart';
 import 'package:student/Teacher/profilepageteacher.dart';
-import 'package:student/controller/login_controller.dart';
+import 'package:student/Teacher/verifyemail.dart';
 import 'package:student/controller/profilecontrollerpage.dart';
-import 'package:student/controller/sign_up_controller.dart';
+
+import '../controller/login_controller.dart';
+import '../controller/sign_up_controller.dart';
 
 class Accountpageteacher extends StatefulWidget {
   const Accountpageteacher({super.key});
@@ -29,7 +30,10 @@ class _ProfileteacherState extends State<Accountpageteacher> {
   @override
   void initState() {
     super.initState();
-    data1.collectionreferenceuser.doc(FirebaseAuth.instance.currentUser!.email).get().then((value) {
+    data1.collectionreferenceuser
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((value) {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];
@@ -44,14 +48,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
         });
       });
     });
-    data2.checkEmailVerification();
   }
 
   @override
   Widget build(BuildContext context) {
+    bool checks = false ;
     if (user.emailVerified) {
       setState(() {
-        data2.isEmailVerified = true;
+      checks = true;      
       });
     }
     return SafeArea(
@@ -104,61 +108,39 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                    child: Container(
-                      color: Colors.white,
-                      child: ListTile(
-                        onTap: () {
-                          Get.to(() => const Myclassespage());
-                        },
-                        leading: const Icon(
-                          Icons.school,
-                          color: Color.fromARGB(255, 161, 46, 46),
-                        ),
-                        title: const Text('             My Classes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
-                        trailing: const Icon(Icons.arrow_forward),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                    child: Container(
-                      color: Colors.white,
-                      child: ListTile(
-                        onTap: () {
-                          Get.to(() => const Mynotificationteacher());
-                        },
-                        leading: const Icon(
-                          Icons.notifications,
-                          color: Color.fromARGB(255, 161, 46, 46),
-                        ),
-                        title: const Text('           My Notifications',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
-                        trailing: const Icon(Icons.arrow_forward),
-                      ),
-                    ),
-                  ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                  //   child: Container(
+                  //     color: Colors.white,
+                  //     child: ListTile(
+                  //       onTap: () {
+                  //         Get.to(() => const Mynotificationteacher());
+                  //       },
+                  //       leading: const Icon(
+                  //         Icons.notifications,
+                  //         color: Color.fromARGB(255, 161, 46, 46),
+                  //       ),
+                  //       title: const Text('           My Notifications',
+                  //           style: TextStyle(
+                  //             fontWeight: FontWeight.bold,
+                  //           )),
+                  //       trailing: const Icon(Icons.arrow_forward),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
                           onTap: () {
-                            if (!data2.isEmailVerified) {
-                              data2.sendverificationemail();
-                            } else {
-                              Get.showSnackbar(const GetSnackBar(
-                                padding: EdgeInsets.all(15),
-                                messageText: Text(
-                                    "The verification E-Mail hasn't send."),
-                              ));
-                            }
+                            Get.to(() => const EmailVerificationScreen());
+                            // if (!data2.isEmailVerified) {
+                            //   data2.sendverificationemail();
+                            // } else {
+                             
+                            // }
                           },
                           leading: const Icon(
                             Icons.email,
@@ -168,15 +150,16 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               )),
-                          trailing: data2.isEmailVerified
-                              ? const Icon(
-                                  Icons.check,
-                                  color: Colors.green,
-                                )
-                              : const Icon(
-                                  Icons.close,
-                                  color: Colors.red,
-                                )),
+                          trailing: checks
+                          ? const Icon(
+                                Icons.check,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              )
+                          ),
                     ),
                   ),
                   const SizedBox(
@@ -231,24 +214,22 @@ class _ProfileteacherState extends State<Accountpageteacher> {
       ),
     );
   }
+
   Widget buildprofilecover() {
     return GestureDetector(
       onTap: () {
         data1.showPicker(context);
       },
       child: Container(
-       decoration: BoxDecoration(
-         color: const Color.fromARGB(255, 234, 234, 234),
-          borderRadius: BorderRadius.circular(10)
-        
-       ),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 234, 234, 234),
+            borderRadius: BorderRadius.circular(10)),
         height: 150,
         width: 140,
-       
         child: SizedBox(
           height: 130,
           width: 200,
-          child:profileurl == ''
+          child: profileurl == ''
               ? Image.asset('assets/user.jpg')
               : Image.network(
                   profileurl,
@@ -257,7 +238,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
       ),
     );
   }
-    
+
   Widget buildusername() {
     return Text(
       '$firstname $lastname',

@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/homenotificationcontroller.dart';
+
+import '../controller/homenotificationcontroller.dart';
 
 class HomeNotificationstudentpage extends StatelessWidget {
   HomeNotificationstudentpage({super.key});
@@ -17,7 +18,9 @@ class HomeNotificationstudentpage extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('College Notification')
+              .collection('Teacher')
+              .doc("Home-Notification")
+              .collection('i')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
@@ -48,20 +51,22 @@ class HomeNotificationstudentpage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                         padding :const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 5, 0),
                                         child: Text(
                                           x["Time"],
-                                          style:const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey),
                                         ),
                                       ),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 5, 0),
                                         child: Text(
                                           x['Teacher Name'],
                                           style: const TextStyle(
@@ -72,7 +77,12 @@ class HomeNotificationstudentpage extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(x['Notification']),
+                                    child: Text(
+                                      x['Notification'],
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                 ],
                               ));
@@ -87,7 +97,6 @@ class HomeNotificationstudentpage extends StatelessWidget {
             }
           },
         ),
-       
       ),
     );
   }

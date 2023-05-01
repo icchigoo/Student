@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student/controller/markcontroller.dart';
+
+import '../controller/markcontroller.dart';
 // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Assignmentteacher extends StatelessWidget {
    Assignmentteacher({super.key});
   final data = Get.put(Markcontroller());
+  final subname = Get.arguments["subname"];
   @override
   Widget build(BuildContext context) {
    
@@ -18,7 +21,7 @@ class Assignmentteacher extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Assignments')
+              .collection('Student').doc(subname).collection("Assignment")
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
@@ -42,7 +45,9 @@ class Assignmentteacher extends StatelessWidget {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Text(x['PDF download url']);
+                        return Card(
+                            elevation: 5, 
+                            child: Text(x['PDF name']));
                       }),
                 );
               }
