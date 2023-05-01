@@ -2,8 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'loginpage.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 
 class Resetpasswordpage extends StatefulWidget {

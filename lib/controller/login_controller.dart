@@ -70,8 +70,7 @@ class LoginController extends GetxController {
   /// TextField Validation
 
   ///sign out code
-  Future<void> signOut() async {
+  void signOut() async {
     await _auth.signOut();
-
   }
 }

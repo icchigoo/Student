@@ -40,7 +40,14 @@ dependencies:
   get: ^4.6.5
   firebase_core: ^2.6.1
   firebase_auth: ^4.2.8
-  cloud_firestore: ^4.4.3 
+  cloud_firestore: ^4.4.3
+  firebase_storage: ^11.0.14
+  syncfusion_flutter_pdfviewer: ^20.4.51
+  file_picker: ^5.2.5
+  syncfusion_flutter_calendar: ^20.4.52
+  firebase_database: ^10.0.14
+  image_picker: ^0.8.6
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +82,7 @@ flutter:
      - assets/note.png
      - assets/notification.png
      - assets/sem.png
+     - assets/user.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

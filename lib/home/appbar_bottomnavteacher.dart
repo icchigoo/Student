@@ -1,8 +1,8 @@
 
-import 'package:flutter/material.dart';
 
-import '../Teacher/menu.dart';
-import 'calendarpage.dart';
+import 'package:flutter/material.dart';
+import 'package:student/Teacher/menu.dart';
+import 'package:student/home/calendarpage.dart';
 
 
 class Homepagelayout extends StatefulWidget {
@@ -42,7 +42,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
   int pageIndex = 0;
 
   final teacherpages = [
-     Menupage(teachername: '', classname: '', subjectname: ' ',),
+    const Menupage(),
     const Calendarpage(),
     // const notificationpage(),
     // const profilepage(),

@@ -4,8 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../Teacher/classlistview.dart';
+import 'package:student/Teacher/classlistview.dart';
 
 class Createclassdetailscontroller extends GetxController{
   static Createclassdetailscontroller get instance => Get.find();
@@ -16,7 +15,6 @@ final teachername = TextEditingController();
 final classname = TextEditingController();
 final subjectname = TextEditingController();
 final formkey = GlobalKey<FormState>();
-
 
 
 void registerclass(String teachername, String classname , String subjectname) async{

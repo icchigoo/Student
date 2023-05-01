@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/sign_up_controller.dart';
-import 'loginpage.dart';
+import 'package:student/controller/sign_up_controller.dart';
+import 'package:student/create_an_account/loginpage.dart';
 
 class Studentaccpage1 extends StatefulWidget {
   const Studentaccpage1({super.key});
